@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import {Routes, Route, Link} from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css"
 
 import UserList from "./components/user-list.component";
+import NewsList from "./components/news-list.component";
 import User from "./components/user.component";
+import News from "./components/news.component";
+import AddNews from "./components/news-add.component";
 
 class App extends Component {
   render() {
@@ -25,14 +28,21 @@ class App extends Component {
                   News
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to={"/add"} className="nav-link">
+                  Add news
+                </Link>
+              </li>
             </div>
           </nav>
           <div className="container mt-3">
-            <Routes>
-              <Route exact path="/" element={<UserList/>}/>
-              <Route exact path="/users" element={<UserList/>}/>
-              <Route exact path="/news" element={}/>
-            </Routes>
+            <Switch>
+              <Route exact path="/" component={NewsList}/>
+              <Route exact path="/users" component={UserList}/>
+              <Route exact path="/news" component={NewsList}/>
+              <Route exact path="/news/:id" component={News}/>
+              <Route exact path="/add" component={AddNews}/>
+            </Switch>
           </div>
         </div>
     );
